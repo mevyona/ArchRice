@@ -39,6 +39,7 @@ sudo pacman -S --noconfirm \
   pipewire-jack \
   pipewire-pulse \
   ttf-dejavu \
+  nautilus \
   ttf-font-awesome \
   noto-fonts \
   code \
