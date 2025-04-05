@@ -1,150 +1,48 @@
 #!/bin/bash
 
-set -e
+# Étape 1 : Exécution du script de setup Hyprland
+echo "▶️ Lancement du script Hyprland distant..."
+bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
 
-# Fonction pour demander à l'utilisateur s'il souhaite installer quelque chose
-ask_install() {
-    while true; do
-        read -p "➡️ Voulez-vous installer $1 ? (y/n) : " yn
-        case $yn in
-            [Yy]* ) return 0;;  # Retourne 0 pour "oui"
-            [Nn]* ) return 1;;  # Retourne 1 pour "non"
-            * ) echo "Réponse invalide, veuillez répondre par 'y' ou 'n'.";;
-        esac
-    done
-}
-
-# 1. Vérifier la connexion réseau avant de commencer
-echo "➡️ Vérification de la connexion réseau..."
-if ! nmcli -t -f ACTIVE,SSID dev wifi | grep '^yes' > /dev/null; then
-    echo "🔴 Vous n'êtes pas connecté à un réseau. Veuillez vous connecter à un réseau Wi-Fi et relancer le script."
-    exit 1
-fi
-
-# 2. Mise à jour du système
-echo "➡️ Mise à jour du système"
+# Étape 2 : Mise à jour des dépôts
+echo "🔄 Mise à jour des paquets..."
 sudo pacman -Syu --noconfirm
 
-# 3. Installation des paquets de base
-echo "➡️ Installation des paquets de base"
-sudo pacman -S --noconfirm \
-  base-devel \
-  git \
-  zsh \
-  neofetch \
-  fastfetch \
-  networkmanager \
-  pipewire \
-  pipewire-alsa \
-  pipewire-jack \
-  pipewire-pulse \
-  ttf-dejavu \
-  nautilus \
-  ttf-font-awesome \
-  noto-fonts \
-  code \
-  kitty \
-  hyprland \
-  waybar \
-  dunst \
-  grim \
-  slurp \
-  wl-clipboard \
-  brightnessctl \
-  xdg-user-dirs \
-  xdg-desktop-portal-hyprland \
-  zsh-syntax-highlighting \
-  zsh-autosuggestions \
-  playerctl \
-  python \
-  zenity \
-  pavucontrol \
-  swaylock \
-  ttf-jetbrains-mono
+# Étape 3 : Installation des paquets officiels
+echo "📦 Installation de paquets²..."
+sudo pacman -S --noconfirm wofi nautilus kitty discord python
 
-# 4. Installation de paru (AUR helper)
-echo "➡️ Installation de paru (AUR helper)"
-if ask_install "paru"; then
-    cd /opt
-    sudo git clone https://aur.archlinux.org/paru.git
-    sudo chown -R $USER:$USER paru
-    cd paru
-    makepkg -si --noconfirm
-else
-    echo "❌ Installation de paru annulée"
-fi
-
-# 5. Installation de yay (AUR helper)
-echo "➡️ Installation de yay (AUR helper)"
-if ask_install "yay"; then
-    cd /opt
-    sudo git clone https://aur.archlinux.org/yay.git
-    sudo chown -R $USER:$USER yay
+# Étape 4 : Installation de yay et paru si non présents
+if ! command -v yay &> /dev/null; then
+    echo "🛠 Installation de yay..."
+    git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si --noconfirm
-else
-    echo "❌ Installation de yay annulée"
+    cd ..
+    rm -rf yay
 fi
 
-# 6. Installation de Zen Browser (AUR)
-echo "➡️ Installation de Zen Browser (AUR)"
-if ask_install "Zen Browser"; then
-    paru -S --noconfirm zen-browser-bin
-else
-    echo "❌ Installation de Zen Browser annulée"
+if ! command -v paru &> /dev/null; then
+    echo "🛠 Installation de paru..."
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si --noconfirm
+    cd ..
+    rm -rf paru
 fi
 
-# 7. Activation de NetworkManager
-echo "➡️ Activation de NetworkManager"
-sudo systemctl enable NetworkManager
-sudo systemctl start NetworkManager
+# Étape 5 : Installation du paquet AUR zen-browser-bin
+echo "🌐 Installation de zen-browser-bin via yay..."
+yay -S --noconfirm zen-browser-bin
 
-# 8. Copie des dotfiles (Hyprland, Waybar, etc.)
-echo "➡️ Copie des dotfiles (Hyprland, Waybar...)"
-mkdir -p ~/.config
-cp -r config/* ~/.config/
+# Étape 6 : Remplacement du dossier Hyprland config
+echo "📁 Remplacement de ~/.config/hypr par ./config/hypr..."
+rm -rf ~/.config/hypr
+cp -r ./config/hypr ~/.config/
 
-# 9. Installation de Oh My Zsh
-if ask_install "Oh My Zsh"; then
-    echo "➡️ Installation d'Oh My Zsh"
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    fi
-
-    # Installation des plugins Zsh
-    echo "➡️ Installation des plugins Zsh et Powerlevel10k"
-    # Plugins (autosuggestions, syntax-highlighting, etc.)
-    if [ ! -d "$HOME/.oh-my-zsh/plugins/zsh-autosuggestions" ]; then
-        git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/plugins/zsh-autosuggestions
-    fi
-
-    if [ ! -d "$HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting" ]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting
-    fi
-
-    # Powerlevel10k
-    if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-    fi
-
-    # Applique les dotfiles de zsh
-    cp config/zsh/.zshrc ~/.zshrc
-else
-    echo "❌ Installation d'Oh My Zsh annulée"
-fi
-
-# 10. Passage à zsh
-if [ -d "$HOME/.oh-my-zsh" ]; then
-    echo "➡️ Passage à zsh"
-    chsh -s /bin/zsh
-fi
-
-# 11. Application du thème Wofi
-echo "➡️ Application du thème Wofi"
+# Étape 7 : Configuration de wofi
+echo "📁 Configuration de Wofi avec ./config/wofi..."
 mkdir -p ~/.config/wofi
+cp -r ./config/wofi/* ~/.config/wofi/
 
-# Copie du fichier CSS du thème Wofi depuis ton dossier config/wofi
-cp config/wofi/style.css ~/.config/wofi/style.css
-
-# 12. Configuration terminée
-echo "✅ Configuration terminée ! Redémarre pour appliquer tout."
+echo "✅ Installation complète ! Redémarre Hyprland pour appliquer les changements."
