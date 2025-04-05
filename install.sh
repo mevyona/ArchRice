@@ -10,7 +10,7 @@ sudo pacman -Syu --noconfirm
 
 # Étape 3 : Installation des paquets officiels
 echo "📦 Installation de paquets²..."
-sudo pacman -S --noconfirm wofi nautilus kitty discord python
+sudo pacman -S --noconfirm wofi nautilus kitty discord python sddm nvidia nvidia-utils
 
 # Étape 4 : Installation de yay et paru si non présents
 if ! command -v yay &> /dev/null; then
