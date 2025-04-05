@@ -1,0 +1,86 @@
+* {
+    font-family: "JetBrains Mono", "Noto Sans JP", sans-serif;
+    font-size: 14px;
+    color: #fdfdfd;
+    background-color: transparent;
+}
+
+window {
+    margin: 0px;
+    background-color: #161a1e;
+    border-radius: 8px;
+    border: 2px solid #E2C0FC;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(226, 192, 252, 0.3); /* Ombre plus subtile */
+}
+
+#input {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    color: #ffffff;
+    background-color: #43474b; /* Fond sombre pour l'input */
+    border-radius: 8px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4); /* Ombre interne plus douce */
+}
+
+#inner-box {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: #161a1e;
+    border-radius: 8px; /* Coins arrondis */
+}
+
+#outer-box {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #161a1e;
+    border-radius: 8px;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+#text {
+    margin: 5px;
+    border: none;
+    color: #E2C0FC; /* Texte coloré en néon */
+}
+
+#entry {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #1e2328; /* Fond sombre pour les entrées */
+    color: #E2C0FC;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#entry:hover {
+    background-color: #43474b; /* Survol avec une couleur différente */
+    color: #ffffff; /* Texte blanc quand survolé */
+}
+
+#entry:selected {
+    background-color: #E2C0FC; /* Fond néon lors de la sélection */
+    color: #161a1e; /* Texte foncé pour contraste */
+    border-radius: 8px; /* Coins arrondis */
+    outline: none;
+}
+
+#entry:selected * {
+    background-color: #E2C0FC;
+    color: #161a1e;
+    border-radius: 8px;
+    outline: none;
+}
+
+#input:focus, #entry:focus {
+    outline: none; /* Retirer le focus par défaut */
+    box-shadow: 0 0 8px rgba(226, 192, 252, 0.5); /* Glow sur focus */
+}

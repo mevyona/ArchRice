@@ -33,27 +33,23 @@ setopt interactive_comments # allow comments in shell
 unsetopt prompt_sp # don't autoclean blanklines
 stty stop undef # disable accidental ctrl s
 
-# history opts
 HISTSIZE=1000000
 SAVEHIST=1000000
-HISTFILE="$XDG_CACHE_HOME/zsh_history" # move histfile to cache
-HISTCONTROL=ignoreboth # consecutive duplicates & commands starting with space are not saved
+HISTFILE="$XDG_CACHE_HOME/zsh_history"
+HISTCONTROL=ignoreboth
 
-# set up prompt
 NEWLINE=$'\n'
 PROMPT="${NEWLINE}%K{#2E3440}%F{#E5E9F0}$(date +%_I:%M%P) %K{#3b4252}%F{#ECEFF4} %n %K{#4c566a} %~ %f%k ❯ "
-# PROMPT="${NEWLINE}%K{$COL0}%F{$COL1}$(date +%_I:%M%P) %K{$COL0}%F{$COL2} %n %K{$COL3} %~ %f%k ❯ " # pywal colors, from postrun script
 echo -e "${NEWLINE}\033[48;2;46;52;64;38;2;216;222;233m $0 \033[0m\033[48;2;59;66;82;38;2;216;222;233m $(uptime -p | cut -c 4-) \033[0m\033[48;2;76;86;106;38;2;216;222;233m $(uname -r) \033[0m"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Alias setup for a smoother terminal experience
 alias a='alias | grep -v "alias "'
 alias nf='neofetch'
 alias ff='fastfetch'
 alias c='clear'
-alias ls='ls -l --color=auto'  # Enhanced 'ls' with colors
-alias lsa='ls -a --color=auto'  # Show hidden files with colors
+alias ls='ls -l --color=auto'
+alias lsa='ls -a --color=auto'
 alias root='cd /'
 alias ..='cd ..'
 alias update='sudo pacman -Syu'
@@ -71,12 +67,10 @@ alias hyprconf='nvim ~/.config/hypr/hyprland.conf'
 alias keyconf='nvim ~/.config/hypr/keybindings.conf'
 alias rm='sudo rm -R'
 
-# Add additional custom functions for better UX
 mkd() {
   mkdir -p "$1" && cd "$1"
 }
 
-# Configure the terminal window to show the current directory
 precmd() {
   echo -ne "\033]0;${USER}@${HOST}: ${PWD}\007"
 }
