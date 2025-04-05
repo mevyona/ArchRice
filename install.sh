@@ -51,8 +51,7 @@ sudo pacman -S --noconfirm \
   firefox \
   bash-completion \
   zsh-syntax-highlighting \
-  zsh-autosuggestions \
-  powerlevel10k
+  zsh-autosuggestions
 
 # 4. Installation de paru (AUR helper)
 echo "➡️ Installation de paru (AUR helper)"
