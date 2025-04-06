@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rclone --vfs-cache-mode writes mount OneDrive: ~/OneDrive &
+./onedrive.sh
 
 while [ ! -d "$HOME/OneDrive" ]; do
     sleep 5
