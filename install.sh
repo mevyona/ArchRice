@@ -28,6 +28,7 @@ paru -S --noconfirm zen-browser-bin visual-studio-code-bin
 
 rm -rf ~/.config/hypr
 cp -r ./config/hypr ~/.config/
+chmod +x ~/.config/hypr/scripts/*.sh
 
 
 mkdir -p ~/.config/wofi
