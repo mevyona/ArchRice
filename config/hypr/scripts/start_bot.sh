@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-while [ ! -d "$HOME/OneDrive" ]; do
+while not test -d "$HOME/OneDrive"
     sleep 5
-done
+end
 
-python ~/OneDrive/BOT/Mevyona/src/bot.pyw
+python $HOME/OneDrive/BOT/Mevyona/src/bot.pyw
