@@ -24,7 +24,7 @@ if ! command -v paru &> /dev/null; then
 fi
 
 sudo pacman -Rns --noconfirm code
-paru -S --noconfirm zen-browser-bin visual-studio-code-bin
+paru -S --noconfirm zen-browser-bin visual-studio-code-bin spotify-adblock rog-control-center 
 
 rm -rf ~/.config/hypr
 cp -r ./config/hypr ~/.config/
@@ -33,8 +33,6 @@ chmod +x ~/.config/hypr/scripts/*.sh
 
 mkdir -p ~/.config/wofi
 cp -r ./config/wofi/* ~/.config/wofi/
-
-paru -S --noconfirm spotify-adblock
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
 
