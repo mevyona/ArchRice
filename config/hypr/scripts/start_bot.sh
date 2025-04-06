@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env fish
 
 while [ ! -d "$HOME/OneDrive" ]; do
     sleep 5
