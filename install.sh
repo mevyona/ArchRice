@@ -33,8 +33,8 @@ chmod +x ~/.config/hypr/scripts/*.sh
 mkdir -p ~/.config/wofi
 cp -r ./config/wofi/* ~/.config/wofi/
 
-#rm -rf ~/.config/fish
-#cp -r ./config/fish ~/.config/
+rm -rf ~/.config/fish
+cp -r ./config/fish ~/.config/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
 
