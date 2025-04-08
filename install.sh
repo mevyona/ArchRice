@@ -38,4 +38,6 @@ cp -r ./config/fish ~/.config/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
 
+sudo pacman -Rns dunst
+
 echo "✅ Installation complète ! Redémarre Hyprland pour appliquer les changements."
