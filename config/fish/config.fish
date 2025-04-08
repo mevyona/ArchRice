@@ -18,6 +18,8 @@ alias reload='source ~/.config/fish/config.fish'
 alias conf='nano ~/.config/fish/config.fish'
 
 alias pm='sudo pacman'
+alias pms='sudo pacman -S'
+alias pmr='sudo pacman -Rns'
 alias update='sudo pacman -Syu'
 alias clean='sudo pacman -Rns $(pacman -Qdtq)'
 

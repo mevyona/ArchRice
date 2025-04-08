@@ -1,0 +1,219 @@
+/* Thème Rofi Ultra Moderne - Basé sur #E2C0FC avec transparence */
+
+* {
+    font: "JetBrains Mono 12";
+    foreground: #FFFFFF;
+    background: #191A2A99; /* 60% opaque */
+    background-alt: #23243899; /* 60% opaque */
+    
+    /* Couleur principale et ses variations */
+    primary: #E2C0FC;
+    primary-dark: #C99DF2;
+    primary-light: #F0D8FFCC; /* ~80% opaque */
+    
+    /* Couleurs d'accent */
+    accent: #A384F3CC; /* ~80% opaque */
+    urgent: #FF5E87CC; /* ~80% opaque */
+    
+    /* Autres couleurs */
+    border: #E2C0FC44; /* ~27% opaque */
+    separator: #E2C0FC33; /* ~20% opaque */
+    
+    /* Propriétés globales */
+    border-radius: 14px;
+    element-padding: 12px;
+}
+
+configuration {
+    drun-display-format: "{name}";
+    drun-match-fields: "name,exec";
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "";
+    display-run: "";
+    display-window: "";
+}
+
+window {
+    background-color: @background;
+    border: 2px;
+    border-radius: @border-radius;
+    border-color: @border;
+    padding: 20px;
+    width: 40%;
+    transparency: "real";
+    fullscreen: false;
+    cursor: "default";
+    spacing: 0px;
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+    spacing: 15px;
+    background-color: transparent;
+}
+
+message {
+    border: 0;
+    padding: 10px;
+    border-radius: @border-radius;
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+textbox {
+    text-color: @foreground;
+    background-color: transparent;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+}
+
+listview {
+    fixed-height: 0;
+    border: 0;
+    spacing: 8px;
+    scrollbar: true;
+    padding: 8px 2px;
+    background-color: transparent;
+    lines: 8;
+    columns: 1;
+}
+
+element {
+    border: 0;
+    padding: @element-padding;
+    border-radius: @border-radius;
+    background-color: @background-alt;
+    spacing: 10px;
+}
+
+element.normal.normal {
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+element.normal.urgent {
+    background-color: @background-alt;
+    text-color: @urgent;
+}
+
+element.normal.active {
+    background-color: @background-alt;
+    text-color: @primary;
+}
+
+element.selected.normal {
+    background-color: #E2C0FCAA; /* ~67% opaque */
+    text-color: #FFFFFF;
+    border: 1px;
+    border-color: #E2C0FC99;
+}
+
+element.selected.urgent {
+    background-color: #FF5E87AA;
+    text-color: #FFFFFF;
+}
+
+element.selected.active {
+    background-color: #A384F3AA;
+    text-color: #FFFFFF;
+}
+
+element.alternate.normal {
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+element.alternate.urgent {
+    background-color: @background-alt;
+    text-color: @urgent;
+}
+
+element.alternate.active {
+    background-color: @background-alt;
+    text-color: @primary;
+}
+
+scrollbar {
+    width: 3px;
+    border: 0;
+    handle-width: 3px;
+    handle-color: #E2C0FC99;
+    border-radius: 10px;
+    background-color: #23243855;
+    padding: 0;
+}
+
+sidebar {
+    border: 0;
+    border-color: @separator;
+    border-radius: @border-radius;
+}
+
+button {
+    padding: 8px;
+    border-radius: @border-radius;
+    background-color: #23243899;
+    text-color: @foreground;
+    cursor: pointer;
+    horizontal-align: 0.5;
+}
+
+button.selected {
+    background-color: #E2C0FC99;
+    text-color: #FFFFFF;
+}
+
+inputbar {
+    padding: 12px 16px;
+    spacing: 10px;
+    background-color: #23243899;
+    border: 1px;
+    border-color: #E2C0FC55;
+    border-radius: @border-radius;
+    children: [ prompt, entry ];
+}
+
+case-indicator {
+    spacing: 0;
+    text-color: @primary;
+}
+
+entry {
+    spacing: 0;
+    text-color: @foreground;
+    placeholder: "Rechercher...";
+    placeholder-color: #FFFFFF77;
+    vertical-align: 0.5;
+}
+
+prompt {
+    spacing: 0;
+    text-color: @primary;
+    vertical-align: 0.5;
+    margin: 0 5px 0 0;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    margin: 0 5px 0 0;
+    text-color: @primary;
+    vertical-align: 0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: none;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color: inherit;
+    size: 24px;
+    padding: 0 10px 0 0;
+}
