@@ -23,8 +23,6 @@ alias pmr='sudo pacman -Rns'
 alias update='sudo pacman -Syu'
 alias clean='sudo pacman -Rns $(pacman -Qdtq)'
 
-alias rm='sudo rm -R'
-
 alias lsl='ls -l'
 alias lsa='ls -a'
 

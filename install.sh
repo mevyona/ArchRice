@@ -30,6 +30,11 @@ rm -rf ~/.config/hypr
 cp -r ./config/hypr ~/.config/
 chmod +x ~/.config/hypr/scripts/*.sh
 
+unzip ./fonts/Alfa_Slab_One.zip
+mkdir -p ~/.fonts
+mv AlfaSlabOne-Regular.ttf ~/.fonts/
+fc-cache -fv
+
 if [ -d "$HOME/.config/rofi" ]; then
   echo "Le dossier ~/.config/rofi existe déjà. Suppression du dossier."
   rm -rf "$HOME/.config/rofi"
