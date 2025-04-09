@@ -25,7 +25,7 @@ fi
 
 sudo pacman -Rns --noconfirm code dunst
 paru -S --noconfirm zen-browser-bin visual-studio-code-bin spotify-adblock rog-control-center rofi-emoji
-
+ç
 rm -rf ~/.config/hypr
 cp -r ./config/hypr ~/.config/
 chmod +x ~/.config/hypr/scripts/*.sh
