@@ -24,7 +24,7 @@ if ! command -v paru &> /dev/null; then
 fi
 
 sudo pacman -Rns --noconfirm code dunst
-paru -S --noconfirm zen-browser-bin visual-studio-code-bin spotify-adblock rog-control-center 
+paru -S --noconfirm zen-browser-bin visual-studio-code-bin spotify-adblock rog-control-center rofi-emoji
 
 rm -rf ~/.config/hypr
 cp -r ./config/hypr ~/.config/
