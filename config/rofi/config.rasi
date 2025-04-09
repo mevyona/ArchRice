@@ -1,23 +1,21 @@
-/* Thème Rofi Ultra Moderne - Basé sur #E2C0FC avec transparence */
-
 * {
     font: "JetBrains Mono 12";
     foreground: #FFFFFF;
-    background: #191A2A99; /* 60% opaque */
-    background-alt: #23243899; /* 60% opaque */
+    background: #191A2A99;
+    background-alt: #23243899;
     
     /* Couleur principale et ses variations */
     primary: #E2C0FC;
     primary-dark: #C99DF2;
-    primary-light: #F0D8FFCC; /* ~80% opaque */
+    primary-light: #F0D8FFCC;
     
     /* Couleurs d'accent */
-    accent: #A384F3CC; /* ~80% opaque */
-    urgent: #FF5E87CC; /* ~80% opaque */
+    accent: #A384F3CC;
+    urgent: #FF5E87CC;
     
     /* Autres couleurs */
-    border: #E2C0FC44; /* ~27% opaque */
-    separator: #E2C0FC33; /* ~20% opaque */
+    border: #E2C0FC44;
+    separator: #E2C0FC33;
     
     /* Propriétés globales */
     border-radius: 14px;
@@ -105,7 +103,7 @@ element.normal.active {
 }
 
 element.selected.normal {
-    background-color: #E2C0FCAA; /* ~67% opaque */
+    background-color: #E2C0FCAA;
     text-color: #FFFFFF;
     border: 1px;
     border-color: #E2C0FC99;
@@ -184,7 +182,7 @@ case-indicator {
 entry {
     spacing: 0;
     text-color: @foreground;
-    placeholder: "Rechercher...";
+    placeholder: "Search...";
     placeholder-color: #FFFFFF77;
     vertical-align: 0.5;
 }

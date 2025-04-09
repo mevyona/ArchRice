@@ -3,7 +3,7 @@ bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
 
 sudo pacman -Syu --noconfirm
 
-sudo pacman -S --noconfirm wofi nautilus kitty discord python python-pip nvidia rofi
+sudo pacman -S --noconfirm wofi nautilus kitty discord python python-pip nvidia rofi noto-fonts-emoji
 
 if ! command -v yay &> /dev/null; then
     echo "🛠 Installation de yay..."
