@@ -122,7 +122,8 @@ function fish_prompt
     set -l right_prompt ""
     
     if test $cmd_duration -gt 2000
-        __segment $git_color $bg_main "$git_symbol $git_branch$git_state"
+        set -l duration (math $cmd_duration / 1000)
+        set right_prompt "$right_prompt$(__right_segment $info_color $bg_main " $time_symbol $duration s ")"
     end
     
     if set -q VIRTUAL_ENV
