@@ -18,7 +18,7 @@ function fish_prompt
     set -l git_symbol "󰊢"
     set -l python_symbol ""
     set -l node_symbol ""
-    set -l time_symbol "󰥔"t
+    set -l time_symbol "󰥔"
     set -l folder_symbol "󰝰"
     set -l error_symbol ""
     set -l root_symbol "󰯄"
@@ -27,6 +27,8 @@ function fish_prompt
     set -l prompt_char "→"
     set -l right_separator ""
     set -l arch_symbol "󰣇"
+    set -l round_left ""
+    set -l round_right ""
     
     function __segment
         set -l bg $argv[1]
@@ -48,13 +50,38 @@ function fish_prompt
         set_color normal
     end
     
+    function __rounded_segment
+        set -l bg $argv[1]
+        set -l fg $argv[2]
+        set -l content $argv[3]
+        set -l next_bg $argv[4]
+        
+        set_color $bg
+        echo -n "$round_left"
+        set_color -b $bg $fg
+        echo -n "$content"
+        set_color $bg
+        echo -n "$round_right"
+        
+        if test -n "$next_bg"
+            set_color -b $next_bg $bg
+            echo -n "$separator"
+        else
+            set_color normal
+        end
+        set_color normal
+    end
+    
     function __right_segment
         set -l bg $argv[1]
         set -l fg $argv[2]
         set -l content $argv[3]
         
         set_color -b $bg $fg
-        echo -n "$right_separator$content"
+        echo -n "$content"
+        set_color normal
+        set_color $bg
+        echo -n "$right_separator"
         set_color normal
     end
     
@@ -64,7 +91,7 @@ function fish_prompt
     
     __segment $user_host_color $bg_main " "(whoami)" " $bg_lighter
     
-    __segment $path_color $bg_main " $folder_symbol "(prompt_pwd)" " $info_color
+    __rounded_segment $path_color $bg_main " $folder_symbol "(prompt_pwd)" " $info_color
     
     if command -sq git; and git rev-parse --is-inside-work-tree >/dev/null 2>&1
         set -l git_branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -95,7 +122,7 @@ function fish_prompt
     set -l right_prompt ""
     
     if test $cmd_duration -gt 2000
-        __segment $git_color $bg_main "$git_symbol $git_branch$git_state" $accent_color
+        __segment $git_color $bg_main "$git_symbol $git_branch$git_state"
     end
     
     if set -q VIRTUAL_ENV
@@ -112,7 +139,7 @@ function fish_prompt
     
     if test $cmd_duration -gt 2000
         set -l duration (math $cmd_duration / 1000)
-        set right_prompt "$right_prompt$(__right_segment $info_color $bg_main "$time_symbol $duration s")"
+        set right_prompt "$right_prompt$(__right_segment $info_color $bg_main " $time_symbol $duration s ")"
     end
     
     set -l jobs_count (jobs -p | wc -l)
@@ -121,7 +148,7 @@ function fish_prompt
     end
     
     if test $last_status -ne 0
-        set right_prompt "$right_prompt$(__right_segment $error_color $bg_main "$error_symbol $last_status")"
+        set right_prompt "$right_prompt$(__right_segment $error_color $bg_main "$error_symbol $last_status ")"
     end
     
     set right_prompt "$right_prompt$(__right_segment $main_color $bg_main)"

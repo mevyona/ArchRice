@@ -47,4 +47,37 @@ cp -r ./config/fish ~/.config/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
 
+if ! command -v spotify &> /dev/null; then
+    echo "==> Installation de Spotify..."
+    yay -S --noconfirm spotify
+else
+    echo "✔ Spotify est déjà installé."
+fi
+
+if ! command -v spicetify &> /dev/null; then
+    echo "==> Installation de Spicetify CLI..."
+    yay -S --noconfirm spicetify-cli
+else
+    echo "✔ Spicetify CLI est déjà installé."
+fi
+
+sudo chmod a+wr /opt/spotify
+sudo chmod a+wr /opt/spotify/Apps -R
+
+spicetify backup apply
+
+curl -fsSL https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.sh | sh
+
+spicetify config custom_apps marketplace
+
+spicetify config inject_css 1 replace_colors 1 disable_sentry 1
+
+if ! spicetify config extensions | grep -q "marketplace.js"; then
+    echo "==> Ajout de marketplace.js aux extensions..."
+    current_ext=$(spicetify config extensions)
+    spicetify config extensions "${current_ext:+$current_ext|}marketplace.js"
+fi
+
+spicetify apply
+
 echo "✅ Installation complète ! Redémarre Hyprland pour appliquer les changements."
